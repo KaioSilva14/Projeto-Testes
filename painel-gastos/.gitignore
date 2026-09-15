@@ -1,0 +1,10 @@
+# Banco SQLite e arquivos auxiliares do modo WAL
+storage/*.sqlite
+storage/*.sqlite-wal
+storage/*.sqlite-shm
+
+# Dependencias (o projeto nao usa Composer, mas evita acidentes)
+/vendor/
+
+# Ambiente local
+.env

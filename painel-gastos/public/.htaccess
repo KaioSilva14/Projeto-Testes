@@ -1,0 +1,20 @@
+# Apache: envia tudo que nao for arquivo existente para o front controller.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Nao reescreve arquivos e diretorios que existem de fato (assets).
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# Sem listagem de diretorio.
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+</IfModule>
