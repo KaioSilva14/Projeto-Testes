@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+:root {
+    --background: #f7f8fc;
+    --cart: #ffffff;
+    --text: #1f2937;
+    --muted: #8b95a7;
+    --primary: #ef5b6f;
+    --primary-dark: #df4056;
+    --soft-primary: #fff0f2;
+    --border: #edf0f5;
+    --shadow: 0 24px 70px rgba(38, 48, 77, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    color: var(--text);
+    background: radial-gradient(circle at top, #fff0f3 0, transparent 35%), var(--background);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.app { width: min(100%, 520px); }
+
+.pomodoro-card {
+    padding: 42px 34px 30px;
+    text-align: center;
+    background: var(--cart);
+    border: 1px solid rgba(237, 240, 245, 0.9);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+}
+
+h1 { margin: 0 0 26px; font-size: clamp(2rem, 7vw, 3rem); }
+
+.mode-buttons {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  background: #f8f9fb;
+  border-radius: 14px;
+}
+
+button { border: 0; cursor: pointer; font: inherit; transition: 0.2s ease; }
+button:focus-visible { outline: 3px solid rgba(239, 91, 111, 0.35); outline-offset: 3px; }
+
+.mode-button {
+  flex: 1;
+  padding: 11px 8px;
+  color: var(--muted);
+  background: transparent;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.mode-button:hover { color: var(--text); }
+.mode-button.active { color: var(--primary); background: #fff; box-shadow: 0 3px 12px rgba(31, 41, 55, 0.07); }
+
+.timer {
+  margin: 34px 0 8px;
+  color: var(--text);
+  font-size: clamp(5rem, 20vw, 8.5rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+
+.status { min-height: 24px; margin: 0 0 24px; color: var(--muted); font-size: 0.95rem; }
+
+.progress-track { height: 8px; margin-bottom: 28px; overflow: hidden; background: #f1f2f6; border-radius: 99px; }
+.progress-bar { width: 0; height: 100%; background: linear-gradient(90deg, var(--primary), #ff9a8b); border-radius: inherit; transition: width 0.3s linear; }
+
+.controls { display: flex; justify-content: center; gap: 12px; }
+.primary-button, .secondary-button { min-width: 128px; padding: 13px 22px; border-radius: 12px; font-weight: 700; }
+.primary-button { color: white; background: var(--primary); box-shadow: 0 8px 18px rgba(239, 91, 111, 0.25); }
+.primary-button:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.secondary-button { color: var(--text); background: var(--soft-primary); }
+.secondary-button:hover { background: #ffe1e6; }
+
+.cycles { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 20px; color: var(--muted); border-top: 1px solid var(--border); font-size: 0.88rem; }
+.cycles strong { display: grid; width: 34px; height: 34px; place-items: center; color: var(--primary); background: var(--soft-primary); border-radius: 50%; }
+
+@media (max-width: 420px) {
+  .pomodoro-card { padding: 32px 20px 24px; }
+  .mode-button { font-size: 0.72rem; }
+  .controls { flex-direction: column; }
+  .primary-button, .secondary-button { width: 100%; }
+}

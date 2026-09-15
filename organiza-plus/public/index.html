@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organiza++</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topo">
+        <div>
+            <p class="eyebrow">PAINEL DE PRODUTIVIDADE</p>
+            <h1>Organiza<span>++</span></h1>
+            <p class="subtitulo">Planeje melhor. Execute com foco.</p>
+        </div>
+        <button id="abrirModal" class="botao principal">+ Nova tarefa</button>
+    </header>
+
+    <main class="container">
+        <section class="resumo">
+            <div class="cartao"><span>Total</span><strong id="total">0</strong></div>
+            <div class="cartao"><span>Pendentes</span><strong id="pendentes">0</strong></div>
+            <div class="cartao"><span>Concluídas</span><strong id="concluidas">0</strong></div>
+            <div class="cartao destaque"><span>Progresso</span><strong id="progresso">0%</strong></div>
+        </section>
+
+        <section class="barra-ferramentas">
+            <input id="pesquisa" type="search" placeholder="Pesquisar tarefas...">
+            <select id="filtro">
+                <option value="todas">Todas as tarefas</option>
+                <option value="pendentes">Pendentes</option>
+                <option value="concluidas">Concluídas</option>
+                <option value="alta">Prioridade alta</option>
+            </select>
+        </section>
+
+        <section id="listaTarefas" class="lista"></section>
+        <p id="mensagemVazia" class="vazio">Nenhuma tarefa encontrada.</p>
+    </main>
+
+    <div id="modal" class="modal escondido">
+        <div class="modal-conteudo">
+            <button id="fecharModal" class="fechar">&times;</button>
+            <h2>Nova tarefa</h2>
+            <form id="formulario">
+                <label>Título<input id="titulo" required maxlength="80" placeholder="Ex.: Estudar C++"></label>
+                <label>Descrição<textarea id="descricao" maxlength="200" placeholder="Detalhes da tarefa"></textarea></label>
+                <label>Prioridade<select id="prioridade"><option value="baixa">Baixa</option><option value="media" selected>Média</option><option value="alta">Alta</option></select></label>
+                <button class="botao principal" type="submit">Adicionar tarefa</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

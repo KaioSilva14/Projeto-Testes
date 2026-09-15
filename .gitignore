@@ -1,0 +1,14 @@
+# Binários compilados
+*.exe
+*.out
+*.o
+*.obj
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <main class="app">
+        <section class="pomodoro-cart" aria-label="Temporizador Pomodoro">
+             <p class="eyebrow">FOCO E PRODUTIVIDADE</p>
+             <h1>Pomodoro Timer</h1>
+
+             <div class="mode-buttons" role="group" aria-label="Modo do temporizador">
+                 <button class="mode-button active" data-mode="focus">Foco</button>
+                 <button class="mode-button" data-mode="short-break">Pausa Curta</button>
+                 <button class="mode-button" data-mode="longBreak">Pausa Longa</button>
+             </div>
+
+             <div class="timer" id="timer" aria-live="polite">25:00</div>
+             <p class="status" id="status">Hora de se concentrar.</p>
+
+             <div class="progress-track" aria-hidden="true">
+                 <div class="progress-bar" id="progressBar"></div>
+             </div>
+
+             <div class="controls">
+                 <button class="primary-button" id="startButton">Iniciar</button>
+                 <button class="secondary-button" id="resetButton">Reiniciar</button>
+             </div>
+
+             <div class="cycles">
+                 <span>Ciclos concluídos:</span>
+                 <strong id="cycles">0</strong>
+             </div>
+        </section>
+     </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

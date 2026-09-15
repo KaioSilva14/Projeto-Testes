@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diário de Aprendizagem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EEF0E8;
+    --paper-line: #D7DCC7;
+    --card: #FBFBF7;
+    --ink: #2B3A2E;
+    --ink-soft: #5C6B57;
+    --ink-faint: #8C9788;
+    --accent: #A0432A;
+    --accent-soft: #EADFC9;
+    --border: #DAD9C8;
+    --danger: #A0432A;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 34px,
+      var(--paper-line) 35px
+    );
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    padding: 40px 20px 80px;
+    min-height: 100vh;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  header h1 {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    max-width: 46ch;
+    line-height: 1.5;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .form-card { position: relative; }
+
+  .form-card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 18px; bottom: 18px;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin: 16px 0 6px;
+    font-weight: 500;
+  }
+
+  label:first-of-type { margin-top: 0; }
+
+  input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 12px;
+    resize: vertical;
+  }
+
+  input:focus, textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: var(--accent);
+  }
+
+  textarea { min-height: 64px; line-height: 1.5; }
+
+  .confidence-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .dot {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid var(--ink-faint);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dot.filled { background: var(--accent); border-color: var(--accent); }
+
+  .confidence-label {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-left: 4px;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  button.primary {
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 11px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  button.primary:hover { background: var(--accent); }
+
+  button.ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    border-radius: 3px;
+    padding: 11px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    cursor: pointer;
+  }
+
+  button.ghost:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 36px 0 14px;
+  }
+
+  .section-title h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.3rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .search {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 7px 10px;
+    background: #fff;
+    width: 180px;
+  }
+
+  .entry {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--ink-faint);
+    border-radius: 2px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+
+  .entry.open { border-left-color: var(--accent); }
+
+  .entry-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .entry-date {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .entry-topic {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .entry-dots { display: flex; gap: 3px; margin-top: 6px; }
+  .entry-dots span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--ink-faint);
+  }
+  .entry-dots span.on { background: var(--accent); }
+
+  .entry-body {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    display: none;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .entry.open .entry-body { display: block; }
+
+  .entry-body dt {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-top: 12px;
+  }
+  .entry-body dt:first-child { margin-top: 0; }
+  .entry-body dd { margin: 3px 0 0; white-space: pre-wrap; }
+
+  .entry-delete {
+    margin-top: 14px;
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--ink-faint);
+    font-size: 0.92rem;
+  }
+
+  .status {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 10px;
+    min-height: 1.1em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Diário de Aprendizagem</h1>
+    <p>Um registro rápido do que você aprendeu, onde travou e o que fazer a seguir. Suas entradas ficam salvas aqui.</p>
+  </header>
+
+  <div class="card form-card">
+    <label for="f-topic">O que você estudou ou aprendeu hoje?</label>
+    <input type="text" id="f-topic" placeholder="ex: Introdução a hooks no React">
+
+    <label for="f-date">Data</label>
+    <input type="date" id="f-date">
+
+    <label for="f-insight">Principal insight ou ideia que ficou</label>
+    <textarea id="f-insight" placeholder="O que fez mais sentido, ou o que te surpreendeu?"></textarea>
+
+    <label for="f-difficulty">Dificuldades ou dúvidas em aberto</label>
+    <textarea id="f-difficulty" placeholder="O que ainda não ficou claro?"></textarea>
+
+    <label for="f-next">Próximo passo</label>
+    <textarea id="f-next" placeholder="O que você vai fazer com isso, ou o que estudar em seguida?"></textarea>
+
+    <label>Nível de confiança no assunto</label>
+    <div class="confidence-row">
+      <div id="dots-input"></div>
+      <span class="confidence-label" id="conf-label">não avaliado</span>
+    </div>
+
+    <div class="actions">
+      <button class="ghost" id="clear-form">Limpar</button>
+      <button class="primary" id="save-entry">Salvar entrada</button>
+    </div>
+    <div class="status" id="save-status"></div>
+  </div>
+
+  <div class="section-title">
+    <h2>Entradas anteriores</h2>
+    <input class="search" id="search" type="text" placeholder="Buscar por tema...">
+  </div>
+
+  <div id="entries-list"></div>
+  <div class="status" id="list-status"></div>
+
+</div>
+
+<script>
+(function () {
+  const STORAGE_KEY = 'diario-entradas';
+  let entries = [];
+  let confidence = 0;
+
+  const $ = (id) => document.getElementById(id);
+  const topicEl = $('f-topic'), dateEl = $('f-date'), insightEl = $('f-insight'),
+        difficultyEl = $('f-difficulty'), nextEl = $('f-next'),
+        dotsInput = $('dots-input'), confLabel = $('conf-label'),
+        listEl = $('entries-list'), searchEl = $('search'),
+        saveStatus = $('save-status'), listStatus = $('list-status');
+
+  const confLabels = ['não avaliado', 'muito inseguro', 'inseguro', 'razoável', 'confiante', 'domino bem'];
+
+  function renderConfidenceInput() {
+    dotsInput.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+      const b = document.createElement('button');
+      b.className = 'dot' + (i <= confidence ? ' filled' : '');
+      b.type = 'button';
+      b.addEventListener('click', () => {
+        confidence = (confidence === i) ? 0 : i;
+        renderConfidenceInput();
+      });
+      dotsInput.appendChild(b);
+    }
+    confLabel.textContent = confLabels[confidence];
+  }
+
+  function todayISO() {
+    const d = new Date();
+    return d.toISOString().slice(0, 10);
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function resetForm() {
+    topicEl.value = '';
+    dateEl.value = todayISO();
+    insightEl.value = '';
+    difficultyEl.value = '';
+    nextEl.value = '';
+    confidence = 0;
+    renderConfidenceInput();
+  }
+
+  async function loadEntries() {
+    listStatus.textContent = 'Carregando entradas…';
+    try {
+      const result = await window.storage.get(STORAGE_KEY, false);
+      entries = result && result.value ? JSON.parse(result.value) : [];
+    } catch (e) {
+      entries = [];
+    }
+    listStatus.textContent = '';
+    renderList();
+  }
+
+  async function persistEntries() {
+    try {
+      const result = await window.storage.set(STORAGE_KEY, JSON.stringify(entries), false);
+      if (!result) throw new Error('sem resultado');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function renderList() {
+    const query = searchEl.value.trim().toLowerCase();
+    const filtered = entries
+      .slice()
+      .sort((a, b) => (b.date + b.id).localeCompare(a.date + a.id))
+      .filter(e => !query || e.topic.toLowerCase().includes(query));
+
+    listEl.innerHTML = '';
+
+    if (entries.length === 0) {
+      listEl.innerHTML = '<div class="empty">Nenhuma entrada ainda. Escreva a primeira acima.</div>';
+      return;
+    }
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="empty">Nenhuma entrada encontrada para essa busca.</div>';
+      return;
+    }
+
+    filtered.forEach(entry => {
+      const div = document.createElement('div');
+      div.className = 'entry';
+      div.dataset.id = entry.id;
+
+      const dots = [1,2,3,4,5].map(i =>
+        `<span class="${i <= (entry.confidence||0) ? 'on' : ''}"></span>`
+      ).join('');
+
+      div.innerHTML = `
+        <div class="entry-top">
+          <div>
+            <p class="entry-topic">${escapeHtml(entry.topic || '(sem tema)')}</p>
+            <div class="entry-dots">${dots}</div>
+          </div>
+          <div class="entry-date">${formatDate(entry.date)}</div>
+        </div>
+        <dl class="entry-body">
+          ${entry.insight ? `<dt>Insight</dt><dd>${escapeHtml(entry.insight)}</dd>` : ''}
+          ${entry.difficulty ? `<dt>Dificuldades</dt><dd>${escapeHtml(entry.difficulty)}</dd>` : ''}
+          ${entry.next ? `<dt>Próximo passo</dt><dd>${escapeHtml(entry.next)}</dd>` : ''}
+        </dl>
+        <button class="entry-delete">Excluir entrada</button>
+      `;
+
+      div.addEventListener('click', (ev) => {
+        if (ev.target.classList.contains('entry-delete')) return;
+        div.classList.toggle('open');
+      });
+
+      div.querySelector('.entry-delete').addEventListener('click', async (ev) => {
+        ev.stopPropagation();
+        entries = entries.filter(e => e.id !== entry.id);
+        renderList();
+        await persistEntries();
+      });
+
+      listEl.appendChild(div);
+    });
+  }
+
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+
+  $('save-entry').addEventListener('click', async () => {
+    const topic = topicEl.value.trim();
+    if (!topic) {
+      saveStatus.textContent = 'Escreva ao menos o tema estudado antes de salvar.';
+      return;
+    }
+    const entry = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      date: dateEl.value || todayISO(),
+      topic,
+      insight: insightEl.value.trim(),
+      difficulty: difficultyEl.value.trim(),
+      next: nextEl.value.trim(),
+      confidence
+    };
+    entries.push(entry);
+    renderList();
+    saveStatus.textContent = 'Salvando…';
+    const ok = await persistEntries();
+    saveStatus.textContent = ok ? 'Entrada salva.' : 'Não foi possível salvar agora — a entrada ficará visível apenas nesta sessão.';
+    resetForm();
+  });
+
+  $('clear-form').addEventListener('click', resetForm);
+  searchEl.addEventListener('input', renderList);
+
+  resetForm();
+  loadEntries();
+})();
+</script>
+</body>
+</html>
