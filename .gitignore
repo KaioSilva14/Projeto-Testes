@@ -5,8 +5,9 @@
 *.obj
 
 # Biblioteca C++ de terceiros (nlohmann/json).
-# Baixada com curl — instruções em organiza-plus/README.md
+# Baixada com curl — instruções em
 organiza-plus/include/json.hpp
+organiza-plus/include/httplib.h
 
 # Sistema
 Thumbs.db
