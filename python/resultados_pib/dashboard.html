@@ -1,0 +1,15 @@
+<!doctype html><html lang='pt-BR'><head><meta charset='utf-8'><title>Dashboard de PIB</title>
+    <style>body{font-family:Arial,sans-serif;background:#f4f7fb;color:#172033;max-width:1200px;margin:auto;padding:28px}h1{margin-bottom:4px}.sub{color:#667085}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:25px 0}.cards div{background:#fff;border-radius:12px;padding:18px;box-shadow:0 3px 12px #17203314}.cards b{display:block;font-size:24px;color:#315efb;margin-bottom:7px}.cards span{color:#667085;font-size:13px}.grafico{background:white;border-radius:12px;padding:8px;margin:18px 0;box-shadow:0 3px 12px #17203314}table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:12px;text-align:left;border-bottom:1px solid #e7ebf2}th{background:#edf2ff}@media(max-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}</style></head><body>
+    <h1>Análise da evolução do PIB</h1><p class='sub'>Dados oficiais do Banco Mundial. Valores correntes em dólares americanos.</p>
+    <div class='cards'>
+      <div><b>8</b><span>países analisados</span></div>
+      <div><b>2025</b><span>último ano disponível</span></div>
+      <div><b>United States</b><span>maior PIB em 2025</span></div>
+      <div><b>5.88%</b><span>CAGR do líder</span></div>
+    </div>
+    <div class='grafico'><iframe src='evolucao_pib.html' width='100%' height='520' frameborder='0'></iframe></div>
+    <div class='grafico'><iframe src='crescimento_pib.html' width='100%' height='520' frameborder='0'></iframe></div>
+    <div class='grafico'><iframe src='ranking_pib.html' width='100%' height='520' frameborder='0'></iframe></div>
+    <div class='grafico'><iframe src='pib_per_capita.html' width='100%' height='520' frameborder='0'></iframe></div>
+    <h2>Resumo por país</h2><table><thead><tr><th>Ranking</th><th>País</th><th>PIB final</th><th>CAGR</th><th>Variação total</th></tr></thead><tbody><tr><td>1</td><td>United States</td><td>US$ 30.77 tri</td><td>5.88%</td><td>1542.44%</td></tr><tr><td>2</td><td>China</td><td>US$ 19.50 tri</td><td>10.38%</td><td>12544.90%</td></tr><tr><td>3</td><td>Germany</td><td>US$ 5.05 tri</td><td>4.74%</td><td>868.24%</td></tr><tr><td>4</td><td>Japan</td><td>US$ 4.44 tri</td><td>4.13%</td><td>625.30%</td></tr><tr><td>5</td><td>United Kingdom</td><td>US$ 4.00 tri</td><td>5.98%</td><td>1620.70%</td></tr><tr><td>6</td><td>India</td><td>US$ 3.96 tri</td><td>7.74%</td><td>3751.44%</td></tr><tr><td>7</td><td>France</td><td>US$ 3.37 tri</td><td>4.62%</td><td>813.86%</td></tr><tr><td>8</td><td>Brazil</td><td>US$ 2.28 tri</td><td>5.67%</td><td>1388.50%</td></tr></tbody></table>
+    <p class='sub'>Fonte: World Development Indicators — Banco Mundial. O resultado depende do último ano disponível na API.</p></body></html>
